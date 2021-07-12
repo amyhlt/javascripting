@@ -1,0 +1,74 @@
+<html>
+<head>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+</head>
+<body>
+
+
+
+<div id="loading" position="absolute"></div>
+<div id="barchart"></div>
+<script>
+ $(document).ready(function() {
+     google.load("visualization", "1", {packages:["corechart"],"callback":chartRender});
+  });
+  </script>
+  <script>
+  google.load('visualization', '1', {packages: ['corechart', 'bar']});
+google.setOnLoadCallback(drawBarChart);
+
+function  drawBarChart(){
+ var data = google.visualization.arrayToDataTable([
+        ['Year', 'Marine Sprite',{role:'annotation'},"Striking Calf",{role:'annotation'},"Tank Picture",{role:'annotation'},"Bucket Slope",{role:'annotation'},"Reborn Kid",{role:'annotation'}],
+        ['2008', 44000,'44K',53000,'53K',12000,'12K', 9000,'9K',25000,'25K'],
+        ['2009',55000,'55K',32000,'32K', 17000, '17K',7000,'7K',12000,'12K'],
+        ['2010',41000,'41K',33000,'33K',11000,'11K',5000,'5K',19000,'19K'],
+        ['2011', 37000,'37K',52000,'52K',9000,'9K',8000,'8K',32000,'32K'],
+        ['2012', 22000,'22K',13000,'13K',15000,'15K',6000,'6K',25000,'25K'],
+         ['2013', 43000,'43K',43000,'43K',33000,'33K',9000,'9K',24000,'24K'],
+        ['2012', 21000,'21K',32000,'32K',20000,'20K',4000,'4K',10000,'10K']
+      ]);
+      
+     var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+                       
+    var options = {
+         animation:  {
+                    startup: 'true',
+                    easing: 'linear',
+                       duration: 1000},
+          title: 'Fiction Book Sales',
+          titleFontSize:20,
+          titleColor:"red",
+          width: 1000,
+           height: 400,
+            annotations: {  textStyle: {  color: 'black',fontSize: 12, bold: true},
+				                    stemLength: 20,
+				                    legendPosition: 'top'},
+           legend: { position: 'top', maxLines: 3 },
+            hAxis: {
+                   minValue: 0,
+                    title:'Number of sales',
+                   gridlines: { count: 40} },
+                   bar: { groupWidth: '75%' },
+                  isStacked: true 
+                  };
+    
+    var chart = new google.visualization.BarChart(document.getElementById('barchart'));
+   /* 
+   google.visualization.events.addListener(chart, 'ready', function() {
+     document.getElementById('loading').style.display='none';
+      alert("Chart is Ready!");
+    });
+    */
+    chart.draw(data, options);}
+    
+  </script>
+  </body>
+ </html> 
+  
